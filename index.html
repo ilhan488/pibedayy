@@ -3,160 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ♡</title>
+<title>Happy Birthday Irdina Balqis 🎂</title>
+
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: #fff7fb;
-  color: #4b3541;
-  overflow-x: hidden;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#ffd6e8,#fff0f7,#ffe5b4);
+  overflow:hidden;
+  color:#7b3155;
 }
-#cover {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff7fb;
-  transition: opacity .7s ease, visibility .7s ease;
+.confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle,#ff75a8 3px,transparent 4px),
+    radial-gradient(circle,#ffd166 3px,transparent 4px),
+    radial-gradient(circle,#8ecae6 3px,transparent 4px);
+  background-size:70px 70px,90px 90px,110px 110px;
+  opacity:.35;
+  animation:move 8s linear infinite;
 }
-#cover.hide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+@keyframes move{to{background-position:70px 100px,-90px 80px,110px -100px}}
+
+#start{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:linear-gradient(135deg,#ffb6d5,#ffd9ea,#ffe9b8);
 }
-.tap {
-  text-align: center;
-  cursor: pointer;
-  user-select: none;
-  animation: float 1.8s ease-in-out infinite;
+.card{
+  width:90%;
+  max-width:430px;
+  padding:35px 25px;
+  background:rgba(255,255,255,.88);
+  border-radius:28px;
+  box-shadow:0 15px 40px rgba(120,40,80,.2);
 }
-.heart { font-size: 58px; margin-bottom: 8px; }
-.tap h1 { margin: 0; font-size: 30px; }
-.tap p { opacity: .65; margin-top: 10px; }
-.wrap {
-  width: min(700px, 100%);
-  margin: auto;
-  padding: 35px 18px 50px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity .8s ease, transform .8s ease;
+.card h1{font-size:32px;margin:10px 0}
+.card p{font-size:17px}
+button{
+  border:0;
+  padding:15px 28px;
+  border-radius:30px;
+  background:#ff6fa5;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(255,80,140,.3);
 }
-.wrap.show { opacity: 1; transform: translateY(0); }
-h1 { font-size: 34px; margin: 8px 0; }
-.sub { font-size: 15px; opacity: .7; margin-bottom: 22px; }
-.card {
-  background: white;
-  border-radius: 24px;
-  padding: 14px;
-  box-shadow: 0 10px 30px rgba(100,60,80,.12);
+#main{
+  display:none;
+  min-height:100vh;
+  padding:25px 15px;
+  text-align:center;
 }
-.card img {
-  width: 100%;
-  height: 600px;
-  object-fit: cover;
-  border-radius: 18px;
-  display: block;
-  transition: opacity .45s ease;
+h1{
+  margin:5px 0;
+  font-size:34px;
 }
-.message {
-  margin: 24px auto 0;
-  line-height: 1.7;
-  font-size: 16px;
-  max-width: 560px;
+.subtitle{
+  margin:5px 0 20px;
+  font-size:16px;
 }
-.count { margin-top: 12px; font-size: 12px; opacity: .5; }
-.music {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  z-index: 5;
-  background: white;
-  padding: 9px 13px;
-  border-radius: 999px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.1);
-  font-size: 13px;
+.slider{
+  width:min(92vw,430px);
+  height:58vh;
+  max-height:600px;
+  margin:auto;
+  border-radius:25px;
+  overflow:hidden;
+  background:white;
+  box-shadow:0 12px 35px rgba(100,40,70,.25);
 }
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+.slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:opacity .5s;
 }
-@media(max-width:600px) {
-  .card img { height: 520px; }
+.message{
+  margin:18px auto 0;
+  max-width:500px;
+  background:rgba(255,255,255,.75);
+  padding:15px 20px;
+  border-radius:20px;
+  font-size:16px;
 }
 </style>
 </head>
 
 <body>
-<div id="cover" onclick="startSurprise()">
-  <div class="tap">
-    <div class="heart">♡</div>
-    <h1>Tap for a surprise</h1>
-    <p>I've got something for you...</p>
+
+<div class="confetti"></div>
+
+<div id="start">
+  <div class="card">
+    <div style="font-size:55px">🎂🎀✨</div>
+    <h1>Something Special...</h1>
+    <p>Tap below for a little birthday surprise 💕</p>
+    <button onclick="startSurprise()">Tap for Surprise 🎁</button>
   </div>
 </div>
 
-<div class="wrap" id="content">
-  <div style="font-size:28px">♡</div>
-  <h1>Happy Birthday, You!</h1>
-  <div class="sub">A little page made just for you</div>
+<div id="main">
+  <div style="font-size:35px">🎈✨🎀✨🎈</div>
+  <h1>Happy Birthday<br>Irdina Balqis! 💕</h1>
+  <div class="subtitle">May your day be as beautiful as you are 🌷</div>
 
-  <div class="card">
-    <img id="photo" src="photo1.jpeg" alt="Our photo">
+  <div class="slider">
+    <img id="photo" src="photo1.jpeg" alt="Irdina Balqis">
   </div>
-
-  <div class="count" id="count">1 / 7</div>
 
   <div class="message">
-    I hope your birthday is filled with happiness, laughter and
-    all the little things that make you smile. ♡<br>
-    Thank you for being you.
+    💗 Semoga sentiasa dimurahkan rezeki, dipermudahkan segala urusan,
+    dan dikelilingi orang-orang yang sayang awak.
+    Keep smiling and keep being you! 🎂✨
   </div>
 </div>
 
-<audio id="music" src="cinderella.mp3" loop preload="auto"></audio>
-<div class="music">♫ Cinderella</div>
+<audio id="music" src="cinderella.mp3" loop></audio>
 
 <script>
-const photos = ['photo1.jpeg', 'photo2.jpeg', 'photo3.jpeg', 'photo4.jpeg', 'photo5.jpeg', 'photo6.jpeg', 'photo7.jpeg'];
+const photos = [
+  "photo1.jpeg",
+  "photo2.jpeg",
+  "photo3.jpeg",
+  "photo4.jpeg",
+  "photo5.jpeg",
+  "photo6.jpeg",
+  "photo7.jpeg"
+];
+
 let index = 0;
-let started = false;
 
-function startSurprise() {
-  if (started) return;
-  started = true;
+function startSurprise(){
+  document.getElementById("start").style.display="none";
+  document.getElementById("main").style.display="block";
 
-  const cover = document.getElementById("cover");
-  const content = document.getElementById("content");
-  const music = document.getElementById("music");
+  const music=document.getElementById("music");
+  music.play().catch(()=>{});
 
-  // User interaction unlocks audio autoplay.
-  music.currentTime = 0;
-  music.play().catch(() => {});
+  setInterval(()=>{
+    index=(index+1)%photos.length;
+    const img=document.getElementById("photo");
+    img.style.opacity="0";
 
-  cover.classList.add("hide");
-  setTimeout(() => content.classList.add("show"), 250);
-
-  // Auto-slide every 3.5 seconds.
-  if (photos.length > 1) {
-    setInterval(() => {
-      const img = document.getElementById("photo");
-      img.style.opacity = "0";
-      setTimeout(() => {
-        index = (index + 1) % photos.length;
-        img.src = photos[index];
-        document.getElementById("count").textContent =
-          `${index + 1} / ${photos.length}`;
-        img.style.opacity = "1";
-      }, 450);
-    }, 3500);
-  }
+    setTimeout(()=>{
+      img.src=photos[index];
+      img.style.opacity="1";
+    },300);
+  },3500);
 }
 </script>
+
 </body>
 </html>
