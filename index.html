@@ -7,18 +7,18 @@
 
 <style>
 *{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;font-family:Arial,sans-serif}
 body{
-  margin:0;
   min-height:100vh;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#ffd6e8,#fff0f7,#ffe5b4);
-  overflow:hidden;
+  background:linear-gradient(135deg,#ffd3e5,#fff0f7 45%,#ffe4b5);
   color:#7b3155;
+  overflow-x:hidden;
 }
 .confetti{
   position:fixed;
   inset:0;
-  pointer-events:none;
+  pointer-events:auto;
+  z-index:0;
   background-image:
     radial-gradient(circle,#ff75a8 3px,transparent 4px),
     radial-gradient(circle,#ffd166 3px,transparent 4px),
@@ -27,7 +27,9 @@ body{
   opacity:.35;
   animation:move 8s linear infinite;
 }
-@keyframes move{to{background-position:70px 100px,-90px 80px,110px -100px}}
+@keyframes move{
+  to{background-position:70px 100px,-90px 80px,110px -100px}
+}
 
 #start{
   position:fixed;
@@ -37,18 +39,19 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
+  padding:20px;
   background:linear-gradient(135deg,#ffb6d5,#ffd9ea,#ffe9b8);
 }
 .card{
-  width:90%;
+  width:100%;
   max-width:430px;
   padding:35px 25px;
-  background:rgba(255,255,255,.88);
+  background:rgba(255,255,255,.9);
   border-radius:28px;
   box-shadow:0 15px 40px rgba(120,40,80,.2);
 }
-.card h1{font-size:32px;margin:10px 0}
-.card p{font-size:17px}
+.card h1{font-size:30px;margin:10px 0}
+.card p{font-size:17px;line-height:1.6}
 button{
   border:0;
   padding:15px 28px;
@@ -60,111 +63,184 @@ button{
   cursor:pointer;
   box-shadow:0 6px 15px rgba(255,80,140,.3);
 }
+
 #main{
   display:none;
+  position:relative;
+  z-index:1;
   min-height:100vh;
-  padding:25px 15px;
+  padding:25px 15px 35px;
   text-align:center;
 }
-h1{
-  margin:5px 0;
+.top{
   font-size:34px;
+  margin-bottom:4px;
+}
+h1{
+  margin:4px 0;
+  font-size:32px;
+  line-height:1.25;
 }
 .subtitle{
-  margin:5px 0 20px;
+  margin:7px 0 18px;
   font-size:16px;
 }
+
 .slider{
   width:min(92vw,430px);
-  height:58vh;
-  max-height:600px;
+  height:min(62vh,600px);
+  min-height:390px;
   margin:auto;
   border-radius:25px;
   overflow:hidden;
-  background:white;
+  background:rgba(255,255,255,.9);
   box-shadow:0 12px 35px rgba(100,40,70,.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
 .slider img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   display:block;
-  transition:opacity .5s;
+  transition:opacity .45s ease;
+  background:#fff;
 }
+.dots{
+  position:absolute;
+  bottom:12px;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.7);
+}
+.dot.active{background:#ff6fa5;transform:scale(1.25)}
+
 .message{
-  margin:18px auto 0;
-  max-width:500px;
-  background:rgba(255,255,255,.75);
-  padding:15px 20px;
-  border-radius:20px;
+  margin:20px auto 0;
+  max-width:620px;
+  background:rgba(255,255,255,.82);
+  padding:20px 22px;
+  border-radius:22px;
+  box-shadow:0 8px 22px rgba(100,40,70,.12);
   font-size:16px;
+  line-height:1.8;
 }
+.message b{font-size:19px}
+.small{margin-top:12px;font-size:14px}
 </style>
 </head>
 
 <body>
-
 <div class="confetti"></div>
 
 <div id="start">
   <div class="card">
     <div style="font-size:55px">🎂🎀✨</div>
-    <h1>Something Special...</h1>
-    <p>Tap below for a little birthday surprise 💕</p>
-    <button onclick="startSurprise()">Tap for Surprise 🎁</button>
+    <h1>A Little Surprise For You 💕</h1>
+    <p>Tap the button below and let the birthday memories begin! 🎁</p>
+    <button onclick="startSurprise()">Tap for Surprise 🎀</button>
   </div>
 </div>
 
-<div id="main">
-  <div style="font-size:35px">🎈✨🎀✨🎈</div>
-  <h1>Happy Birthday<br>Irdina Balqis! 💕</h1>
-  <div class="subtitle">May your day be as beautiful as you are 🌷</div>
+<main id="main">
+  <div class="top">🎈 ✨ 🎀 ✨ 🎈</div>
+  <h1>Happy Birthday<br>Irdina Balqis! 💗</h1>
+  <div class="subtitle">A little collection of beautiful memories just for you 🌷</div>
 
   <div class="slider">
-    <img id="photo" src="photo1.jpeg" alt="Irdina Balqis">
+    <img id="photo" src="photo1.jpeg" alt="Birthday memory">
+    <div class="dots" id="dots"></div>
   </div>
 
   <div class="message">
-    💗 Semoga sentiasa dimurahkan rezeki, dipermudahkan segala urusan,
-    dan dikelilingi orang-orang yang sayang awak.
-    Keep smiling and keep being you! 🎂✨
+    <b>Happy Birthday, Irdina Balqis! 🎂💐</b><br><br>
+    Semoga bertambahnya umur ini membawa lebih banyak kebahagiaan,
+    ketenangan, rezeki dan perkara-perkara baik dalam hidup awak.
+    Semoga setiap impian yang awak simpan satu per satu menjadi kenyataan,
+    dan semoga awak sentiasa diberikan kekuatan untuk melalui setiap hari
+    walaupun ada masa yang tidak mudah. 💕<br><br>
+    Terima kasih untuk semua senyuman, gelak tawa dan kenangan yang
+    telah tercipta. Jangan pernah lupa bahawa awak sangat berharga,
+    sangat disayangi dan layak untuk mendapatkan perkara-perkara yang
+    baik dalam hidup. Keep smiling, keep shining and always be yourself! ✨
+    <br><br>
+    Here's to another year of beautiful memories, new adventures and
+    lots of happiness. Have the happiest birthday ever! 🎀🎉💗
   </div>
-</div>
 
-<audio id="music" src="cinderella.mp3" loop></audio>
+  <div class="small">Made with love for Irdina Balqis 💕</div>
+</main>
+
+<audio id="music" src="cinderella.mp3" loop preload="auto"></audio>
 
 <script>
-const photos = [
-  "photo1.jpeg",
-  "photo2.jpeg",
-  "photo3.jpeg",
-  "photo4.jpeg",
-  "photo5.jpeg",
-  "photo6.jpeg",
-  "photo7.jpeg"
+const photos=[
+  "photo1.jpeg","photo2.jpeg","photo3.jpeg","photo4.jpeg",
+  "photo5.jpeg","photo6.jpeg","photo7.jpeg"
 ];
 
-let index = 0;
+let index=0;
+let started=false;
+
+const img=document.getElementById("photo");
+const dots=document.getElementById("dots");
+
+photos.forEach((_,i)=>{
+  const d=document.createElement("span");
+  d.className="dot"+(i===0?" active":"");
+  dots.appendChild(d);
+});
+
+function updateDots(){
+  document.querySelectorAll(".dot").forEach((d,i)=>{
+    d.classList.toggle("active",i===index);
+  });
+}
+
+function showNext(){
+  const next=(index+1)%photos.length;
+  const nextImg=new Image();
+
+  nextImg.onload=function(){
+    img.style.opacity="0";
+    setTimeout(()=>{
+      index=next;
+      img.src=photos[index];
+      img.style.opacity="1";
+      updateDots();
+    },250);
+  };
+
+  nextImg.onerror=function(){
+    // Skip a missing image instead of showing a broken-image icon.
+    index=next;
+    if(index !== 0) showNext();
+  };
+
+  nextImg.src=photos[next];
+}
 
 function startSurprise(){
+  if(started)return;
+  started=true;
+
   document.getElementById("start").style.display="none";
   document.getElementById("main").style.display="block";
 
   const music=document.getElementById("music");
   music.play().catch(()=>{});
 
-  setInterval(()=>{
-    index=(index+1)%photos.length;
-    const img=document.getElementById("photo");
-    img.style.opacity="0";
-
-    setTimeout(()=>{
-      img.src=photos[index];
-      img.style.opacity="1";
-    },300);
-  },3500);
+  // Auto-slide every 3.5 seconds.
+  setInterval(showNext,1000);
 }
 </script>
-
 </body>
 </html>
